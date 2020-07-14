@@ -1,6 +1,7 @@
 import xadmin
-from xadmin import views 
-from op_xadmin.models import goods, ops, goodsInfo
+from xadmin import views
+import op_xadmin.xplugin
+from op_xadmin.models import goods, ops
 	#, orderList, orderInfo, factoryInfo, deliveryInfo, deliveryList
 
 # Register your models here.
@@ -17,17 +18,12 @@ class BaseSetting(object):
 
 xadmin.site.register(views.BaseAdminView, BaseSetting)	
 
-class goodsInfoInline():
-	model = goodsInfo
-	fields = ['color', 'size', 'normal_size_price', 'big_size_price']
-	extra = 0
-
 class goodsAdmin(object):
 	list_display = ['op_id', 'kayouli_id', 'factory_name', 'goods_name']
 	search_fields = ['op_id', 'kayouli_id', 'factory_name', 'goods_name']
 	list_filter = ['op_id', 'kayouli_id', 'factory_name', 'goods_name']
-	fields = ('kayouli_id', 'factory_name', 'goods_name')
-	inlines = [goodsInfoInline]
+	fields = ('kayouli_id', 'factory_name', 'goods_name', 'color', 'size', 'normal_size_price', 'big_size_price')
+	custom_details = {'op_id': {'title': u'xx明细', 'load_url': 'detail2'}}
 
 xadmin.site.register(goods, goodsAdmin)
 
@@ -35,16 +31,6 @@ xadmin.site.register(goods, goodsAdmin)
 #     list_display = ['opera_name']
 #
 # xadmin.site.register(ops, opsAdmin)
-
-class goodsInfoAdmin(object):
-	list_display = ['op_id', 'color', 'size', 'normal_size_price', 'big_size_price']
-	search_fields = ['op_id']
-	list_filter = ['op_id']
-	# list_display = ['factory_name', 'goods_name', 'color', 'size', 'normal_size_price', 'big_size_price']
-	# search_fields = ['factory_name', 'goods_name']
-	# list_filter = ['factory_name', 'goods_name']
-
-xadmin.site.register(goodsInfo, goodsInfoAdmin)
 
 # class factoryInfoAdmin(object):
 # 	list_display = ['factory_id', 'factory_name']

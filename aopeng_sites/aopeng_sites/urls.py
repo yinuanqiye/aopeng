@@ -31,7 +31,7 @@ urlpatterns = [
 	#url(r'^xadmin/', xadmin.site.urls),
 	#url(r'^factory/', factory.urls), 
 	path('xadmin/', xadmin.site.urls),
-	# path('op_xadmin/', include('op_xadmin.urls'))
+	path('op_xadmin/', include('op_xadmin.urls'))
 	]
 
 #urlpatterns = [

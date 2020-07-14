@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'crispy_forms',
     'reversion',
     'op_xadmin', 
-    'factory', 
+    'factory',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [

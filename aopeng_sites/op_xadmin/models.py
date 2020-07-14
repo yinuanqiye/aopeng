@@ -12,13 +12,18 @@ class ops(models.Model):
 
 	def __str__(self): 
 		return self.opera_name
-		
+
+
 class goods(models.Model):
 	op_id = models.CharField(primary_key=True, max_length=15, unique=True, verbose_name=u"奥鹏编号")
 	kayouli_id = models.CharField(max_length=32, blank=True, null=True,default=None, verbose_name=u"卡友立货号")
 	factory_name = models.CharField(max_length=32, blank=True, null=True,default=None, verbose_name=u"工厂名")
 	goods_name = models.CharField(max_length=32, blank=True, null=True,default=None, verbose_name=u'货号')
-	
+	color = models.CharField(max_length=100, default=None, null=False, blank=False, verbose_name=u'颜色')
+	size = models.CharField(max_length=100, default=None, null=False, blank=False, verbose_name=u'尺码')
+	normal_size_price = models.PositiveIntegerField(verbose_name=u'普码价格', null=False, default=None, blank=False)
+	big_size_price = models.PositiveIntegerField(verbose_name=u'大码价格', null=False, default=None, blank=False)
+
 	class Meta:
 		db_table = 'goodsList'
 		verbose_name = '产品列表'
@@ -28,20 +33,20 @@ class goods(models.Model):
 		return '%s&%s' % (self.factory_name, self.goods_name)
 
 
-class goodsInfo(models.Model):
-	op_id = models.ForeignKey('goods', on_delete=models.CASCADE, primary_key=True)
-	color = models.CharField(max_length=100, default=None, null=False, blank=False, verbose_name=u'颜色')
-	size = models.CharField(max_length=100, default=None, null=False, blank=False, verbose_name=u'尺码')
-	normal_size_price = models.PositiveIntegerField(verbose_name=u'普码价格')
-	big_size_price = models.PositiveIntegerField(verbose_name=u'大码价格')
-
-	class Meta:
-		db_table = 'goodsDetails'
-		verbose_name = '产品详细信息'
-		verbose_name_plural = verbose_name
-
-	def __str__(self):
-		return self.op_id
+# class goodsInfo(models.Model):
+# 	op_id = models.ForeignKey('goods', on_delete=models.CASCADE, primary_key=True)
+# 	color = models.CharField(max_length=100, default=None, null=False, blank=False, verbose_name=u'颜色')
+# 	size = models.CharField(max_length=100, default=None, null=False, blank=False, verbose_name=u'尺码')
+# 	normal_size_price = models.PositiveIntegerField(verbose_name=u'普码价格')
+# 	big_size_price = models.PositiveIntegerField(verbose_name=u'大码价格')
+#
+# 	class Meta:
+# 		db_table = 'goodsDetails'
+# 		verbose_name = '产品详细信息'
+# 		verbose_name_plural = verbose_name
+#
+# 	def __str__(self):
+# 		return self.op_id
 
 # class factoryInfo(models.Model):
 # 	factory_id = models.CharField(max_length=5, unique=True, default=None, null=False, blank=False)
